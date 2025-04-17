@@ -1,59 +1,101 @@
-# ViceriTodoFrontend
+# TODO Frontend - Desafio Angular
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.8.
+Aplicação frontend Angular para consumir a API de tarefas (TO-DO), desenvolvida como parte de um desafio técnico.
 
-## Development server
+---
 
-To start a local development server, run:
+## 📄 Tecnologias Utilizadas
+
+- Angular 19 (standalone components + functional routing)
+- RxJS
+- HttpClientModule
+- CSS Básico
+- Docker (para execução containerizada)
+
+---
+
+## 🔄 Instalação Local
 
 ```bash
+git clone https://github.com/seu-usuario/todo-frontend.git
+cd todo-frontend
+npm install
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Acesse: [http://localhost:4200](http://localhost:4200)
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🚀 Execução com Docker
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Este projeto já inclui um `Dockerfile` e `nginx.conf` prontos para produção.
 
 ```bash
-ng generate --help
+docker build -t todo-frontend .
+docker run -p 4200:80 todo-frontend
 ```
 
-## Building
+A aplicação estará acessível em:
 
-To build the project run:
+```
+http://localhost:4200
+```
+
+O `Dockerfile` realiza o build Angular com `--configuration production` e serve os arquivos finais via NGINX.
+
+---
+
+## ☁️ Publicação Simples na AWS
+
+1. Construa a aplicação com:
 
 ```bash
-ng build
+npm run build -- --configuration production
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+2. Crie a imagem Docker (já incluída neste repositório)
+3. Suba a imagem para um container registry (ex: Amazon ECR)
+4. Configure um ambiente no AWS Elastic Beanstalk ou ECS/Fargate para rodar a imagem
+5. O container deve expor a porta 80 para acesso via Load Balancer ou diretamente via DNS
 
-## Running unit tests
+> Alternativamente, você pode publicar os arquivos de `dist/viceri-todo-frontend` em um bucket S3 com hospedagem estática ativada.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
+## 📘 Funcionalidades
+
+- Tela de Cadastro com validação de nome, e-mail e senha
+- Tela de Login com autenticação via JWT
+- Tela de Listagem de Tarefas pendentes
+- Criação de Tarefas (com prioridade)
+- Marcar tarefas como concluídas (persistente)
+- Roteamento protegido com AuthGuard
+- Interceptor para envio automático do token JWT
+
+---
+
+## 📂 Estrutura do Projeto
+
+```
+src/app/
+├── auth/
+│   ├── login/
+│   ├── register/
+├── task/
+│   ├── task-list/
+│   ├── task-form/
+├── services/
+├── models/
+├── guards/
+├── interceptors/
+├── app.routes.ts
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## 🙌 Autor
 
-```bash
-ng e2e
-```
+Thiago Kemp
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
