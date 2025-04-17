@@ -14,7 +14,14 @@
     <li *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center">
       <div>
         <strong>{{ task.description }}</strong>
-        <span class="badge text-bg-secondary ms-2">{{ task.priority }}</span>
+        <span class="badge ms-2"
+              [ngClass]="{
+                'text-bg-danger': task.priority === 'Alta',
+                'text-bg-warning': task.priority === 'Média',
+                'text-bg-primary': task.priority === 'Baixa'
+              }">
+          {{ task.priority }}
+        </span>
       </div>
       <button class="btn btn-sm btn-success" (click)="markAsDone(task.id)">Concluir</button>
     </li>
