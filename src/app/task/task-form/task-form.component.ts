@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { TaskService } from '../../services/task.service';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
 import { TaskForm } from '../../models/task-form.model';
@@ -11,7 +11,7 @@ import { TaskForm } from '../../models/task-form.model';
   standalone: true,
   templateUrl: './task-form.component.html',
   styleUrls: ['./task-form.component.css'],
-  imports: [ReactiveFormsModule, CommonModule, NavbarComponent]
+  imports: [ReactiveFormsModule, CommonModule, NavbarComponent, RouterLink]
 })
 export class TaskFormComponent {
   form: FormGroup<TaskForm>;
